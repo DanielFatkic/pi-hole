@@ -291,7 +291,12 @@ elif is_command rpm ; then
     LIGHTTPD_USER="lighttpd"
     LIGHTTPD_GROUP="lighttpd"
     LIGHTTPD_CFG="lighttpd.conf.fedora"
-    if grep -qiE 'centos|scientific' /etc/redhat-release; then
+    # If the host OS is Fedora,
+    if grep -qiE 'fedora|fedberry' /etc/redhat-release; then
+        # all required packages should be available by default with the latest fedora release
+        : # continue
+    # or if host OS is CentOS,
+    elif grep -qiE 'centos|scientific' /etc/redhat-release; then
         # Pi-Hole currently supports CentOS 7+ with PHP7+
         SUPPORTED_CENTOS_VERSION=7
         SUPPORTED_CENTOS_PHP_VERSION=7
